@@ -11,7 +11,25 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
-  // run when dependency change
+  // run when remove dom
+  useEffect(() => {
+    console.log("EFFECT RUNNING");
+    return () => {
+      console.log("EFFECT CLEAN UP");
+    };
+  }, []);
+
+  // run when every thing change (click, type, load)
+  // useEffect(() => {
+  //   console.log("EFFECT RUNNING")
+  // }
+
+  // run once when first load
+  // useEffect(() => {
+  //   console.log("EFFECT RUNNING")
+  // ,[]}
+
+  // run when dependency change enteredEmail, enteredPassword
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log("Checking form valid");
