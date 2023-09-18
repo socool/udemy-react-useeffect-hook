@@ -13,10 +13,18 @@ const Login = (props) => {
 
   // run when dependency change
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes("@") && enteredPassword.trim().length > 6,
-    );
-  }, [setFormIsValid, enteredEmail, enteredPassword]);
+    const identifier = setTimeout(() => {
+      console.log("Checking form valid");
+      setFormIsValid(
+        enteredEmail.includes("@") && enteredPassword.trim().length > 6,
+      );
+    }, 500);
+
+    return () => {
+      console.log("CLEAN UP");
+      clearTimeout(identifier);
+    };
+  }, [enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
