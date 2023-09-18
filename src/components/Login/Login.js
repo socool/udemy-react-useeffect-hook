@@ -11,12 +11,12 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
-  // run once components is render
-  // useEffect(() => {
-  //   setFormIsValid(
-  //     event.target.value.includes("@") && enteredPassword.trim().length > 6,
-  //   );
-  // }, []);
+  // run when dependency change
+  useEffect(() => {
+    setFormIsValid(
+      enteredEmail.includes("@") && enteredPassword.trim().length > 6,
+    );
+  }, [setFormIsValid, enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
@@ -24,10 +24,6 @@ const Login = (props) => {
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
-
-    setFormIsValid(
-      event.target.value.trim().length > 6 && enteredEmail.includes("@"),
-    );
   };
 
   const validateEmailHandler = () => {
