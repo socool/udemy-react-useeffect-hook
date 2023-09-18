@@ -64,18 +64,21 @@ const Login = (props) => {
   //   console.log("EFFECT RUNNING")
   // ,[]}
 
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+
   // run when dependency change enteredEmail, enteredPassword
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log("Checking form valid");
-      setFormIsValid(emailState.isValid && passwordState.isValid);
+      setFormIsValid(emailIsValid && passwordIsValid);
     }, 500);
 
     return () => {
       console.log("CLEAN UP");
       clearTimeout(identifier);
     };
-  }, [emailState, passwordState]);
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
